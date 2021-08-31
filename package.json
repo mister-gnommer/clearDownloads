@@ -1,0 +1,24 @@
+{
+  "name": "cleardownloads",
+  "version": "1.0.0",
+  "description": "clearDownloads",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mister-gnommer/clearDownloads.git"
+  },
+  "author": "mister-gnommer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mister-gnommer/clearDownloads/issues"
+  },
+  "homepage": "https://github.com/mister-gnommer/clearDownloads#readme",
+  "dependencies": {
+    "date-fns": "^2.23.0",
+    "fs-extra": "^10.0.0"
+  }
+}
