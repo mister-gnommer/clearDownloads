@@ -13,10 +13,10 @@ const { differenceInCalendarDays, format } = require("date-fns")
  *   atime - access time
  */
 const main = async (
-  path = "C:/Users/kris/OneDrive/Pobrane/tmp",
+  path = "C:/Users/kris/OneDrive/Pobrane",
   silentlyRmv = false,
-  tempTag = "",
-  timestampType = "mtime"
+  tempTag = "_!tmp_",
+  timestampType = "atime"
 ) => {
   try {
     // remove files from tmp directory or just ensure it exists:
