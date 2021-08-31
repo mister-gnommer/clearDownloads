@@ -1,5 +1,5 @@
 const fse = require("fs-extra")
-const { differenceInCalendarDays } = require("date-fns")
+const { differenceInCalendarDays, format } = require("date-fns")
 
 /**
  * Looks for files and dirs signed with tempTag and moves them to temporary folder which will be cleard on next run
@@ -43,12 +43,27 @@ const main = async (
           ) > 14 &&
           fileStats.isFile()
         ) {
-          await fse.move(`${path}/${fileName}`, `${path}/_toRemove/${fileName}`)
-          movedCounter++
+          // separate try...catch to handle duplicated files:
+          try {
+            await fse.move(
+              `${path}/${fileName}`,
+              `${path}/_toRemove/${fileName}`
+            )
+            movedCounter++
+          } catch (err) {
+            if (err.message === "dest already exists.") {
+              await fse.move(
+                `${path}/${fileName}`,
+                `${path}/_toRemove/DUP-${format(new Date(), "T")}-${fileName}`
+              )
+              movedCounter++
+            } else throw err
+          }
         }
       })
     )
     console.log(`Files moved: ${movedCounter}`)
+    process.exitCode = 0
   } catch (err) {
     console.log(err)
   }
